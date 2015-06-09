@@ -1,3 +1,17 @@
+body{ text-align: center; }
+#world {width: 900px; margin: 0 auto 0 auto; text-align: left; }
+#reglas {width: 300px; float:right}
+#mensajes{ height: 32px; margin-bottom: 40px; width: 900px; text-transform: uppercase; text-align: center}
+#mesa{ width: 500px; float: left; margin-bottom: 70px;}
+#sheepStock{width: 100px; float: left; margin-bottom: 70px;}
+#field{margin-bottom: 20px}
+#hand{margin-bottom: 20px}
+#deck{margin-bottom: 20px}
+#discardPile{width: 350px; float: left; margin-bottom: 20px}
+#exile{width: 150px; float: right; margin-bottom: 20px}
+      
+#mensajes {font-size: 18px; color: #0000FF; font-weight: bold }
+
 .card {
   display: inline-block;
   margin: 0.5ex;
@@ -24,8 +38,8 @@
 
 .card.sheep > .border > .body {
   display: inline-block;
-  width: 5.6ex;
-  height: 3.8ex;
+  width: 6.6ex;
+  height: 4.8ex;
   padding: 0.5ex;
   border-top: 2ex solid #cff;
   border-bottom: 2ex solid #3c3;
@@ -43,11 +57,12 @@
 
 .card.event > .border > .body {
   display: inline-block;
-  width: 5.1ex;
+  width: 10.6ex;
+  height: 13.8ex;  
   padding: 0.5ex 0.5ex 0.5ex 0;
-  background: #ec8;
+  background: #B2FF66;
   text-align: center;
-  line-height: 7.8ex;
+  line-height: 13.8ex;
   border-left: 0.5ex solid #db7;
 }
 
@@ -64,7 +79,7 @@
   margin: 0.5ex;
   padding: 0.5ex;
   border-radius: 1ex;
-  background: #9d9;
+  background: #66CC00;
 }
 
 .stacked.cards > .card,
@@ -78,28 +93,28 @@
 .loosely.lined.cards > .card {margin-left: 1.5em;}
 .lined.cards > .card:first-child {margin-left: 0;}
 
-.lined.cards > .card:nth-child( 1) {transform: rotate(-4deg); -webkit-transform: rotate(-4deg);}
-.lined.cards > .card:nth-child( 2) {transform: rotate( 0deg); -webkit-transform: rotate( 0deg);}
-.lined.cards > .card:nth-child( 3) {transform: rotate( 2deg); -webkit-transform: rotate( 2deg);}
-.lined.cards > .card:nth-child( 4) {transform: rotate(-3deg); -webkit-transform: rotate(-3deg);}
-.lined.cards > .card:nth-child( 5) {transform: rotate( 1deg); -webkit-transform: rotate( 1deg);}
-.lined.cards > .card:nth-child( 6) {transform: rotate( 4deg); -webkit-transform: rotate( 4deg);}
-.lined.cards > .card:nth-child( 7) {transform: rotate( 2deg); -webkit-transform: rotate( 2deg);}
-.lined.cards > .card:nth-child( 8) {transform: rotate( 1deg); -webkit-transform: rotate( 1deg);}
-.lined.cards > .card:nth-child( 9) {transform: rotate( 4deg); -webkit-transform: rotate( 4deg);}
-.lined.cards > .card:nth-child(10) {transform: rotate(-3deg); -webkit-transform: rotate(-3deg);}
-.lined.cards > .card:nth-child(11) {transform: rotate(-4deg); -webkit-transform: rotate(-4deg);}
-.lined.cards > .card:nth-child(12) {transform: rotate( 0deg); -webkit-transform: rotate( 0deg);}
-.lined.cards > .card:nth-child(13) {transform: rotate( 4deg); -webkit-transform: rotate( 4deg);}
-.lined.cards > .card:nth-child(14) {transform: rotate(-1deg); -webkit-transform: rotate(-1deg);}
-.lined.cards > .card:nth-child(15) {transform: rotate(-3deg); -webkit-transform: rotate(-3deg);}
-.lined.cards > .card:nth-child(16) {transform: rotate( 1deg); -webkit-transform: rotate( 1deg);}
-.lined.cards > .card:nth-child(17) {transform: rotate( 2deg); -webkit-transform: rotate( 2deg);}
-.lined.cards > .card:nth-child(18) {transform: rotate(-1deg); -webkit-transform: rotate(-1deg);}
-.lined.cards > .card:nth-child(19) {transform: rotate( 1deg); -webkit-transform: rotate( 1deg);}
-.lined.cards > .card:nth-child(20) {transform: rotate(-3deg); -webkit-transform: rotate(-3deg);}
-.lined.cards > .card:nth-child(21) {transform: rotate(-4deg); -webkit-transform: rotate(-4deg);}
-.lined.cards > .card:nth-child(22) {transform: rotate( 0deg); -webkit-transform: rotate( 0deg);}
+.lined.cards > .card:nth-child( 1) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child( 2) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child( 3) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child( 4) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child( 5) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child( 6) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child( 7) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child( 8) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child( 9) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child(10) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child(11) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child(12) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child(13) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child(14) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child(15) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child(16) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child(17) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child(18) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child(19) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child(20) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child(21) {top: 0.00ex; left: 0.00ex;}
+.lined.cards > .card:nth-child(22) {top: 0.00ex; left: 0.00ex;}
 
 .stacked.cards > .card {position: relative;}
 .stacked.cards > .card:nth-child( 1) {top: 0.00ex; left: 0.00ex;}

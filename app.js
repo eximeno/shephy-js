@@ -110,28 +110,28 @@ var shephy = {};
 
   function makeInitalDeck() {
     var names = [
-      'All-purpose Sheep',
-      'Be Fruitful',
-      'Be Fruitful',
-      'Be Fruitful',
-      'Crowding',
-      'Dominion',
-      'Dominion',
-      'Falling Rock',
-      'Fill the Earth',
-      'Flourish',
-      'Golden Hooves',
-      'Inspiration',
-      'Lightning',
-      'Meteor',
-      'Multiply',
-      'Plague',
-      'Planning Sheep',
-      'Sheep Dog',
-      'Shephion',
-      'Slump',
-      'Storm',
-      'Wolves'
+      'Duplicar',
+      'Fructificar',
+      'Fructificar',
+      'Fructificar',
+      'Apiñar',
+      'Dominio',
+      'Dominio',
+      'Desprender',
+      'Repoblar',
+      'Florecer',
+      'Pezuñas',
+      'Inspiración',
+      'Relámpago',
+      'Meteorito',
+      'Multiplicar',
+      'Plaga',
+      'Planificar',
+      'Ovejero',
+      'Fiebre',
+      'Declive',
+      'Tormenta',
+      'Lobos'
     ];
     var cards = names.map(makeEventCard);
     shuffle(cards);
@@ -204,19 +204,19 @@ var shephy = {};
     if (world.field.some(function (c) {return c.rank == 1000;})) {
       return {
         result: 'win',
-        description: 'You win!'
+        description: '¡Has ganado!'
       };
     }
     if (world.enemySheepCount == 1000) {
       return {
         result: 'lose',
-        description: 'Enemies reached 1000 sheep - you lose.'
+        description: 'Tu rival ha alcanzado las mil ovejas, has perdido.'
       };
     }
     if (world.field.length == 0) {
       return {
         result: 'lose',
-        description: 'You lost all your sheep - you lose.'
+        description: 'Has perdido todas tus ovejas, has perdido.'
       };
     }
 
@@ -274,7 +274,7 @@ var shephy = {};
     if (world.hand.length == 0 && world.deck.length == 0) {
       return automated([
         {
-          description: 'Remake Deck then fill Hand',
+          description: 'Baraja el mazo y repón tu mano.',
           gameTreePromise: S.delay(function () {
             var wn = S.clone(world);
             S.remakeDeckX(wn);
@@ -292,8 +292,8 @@ var shephy = {};
         {
           description:
             5 - world.hand.length == 1
-            ? 'Draw a card'
-            : 'Draw cards',
+            ? 'Roba una carta'
+            : 'Roba cartas',
           gameTreePromise: S.delay(function () {
             var wn = S.clone(world);
             while (S.shouldDraw(wn))
@@ -304,10 +304,10 @@ var shephy = {};
       ]);
     }
 
-    return described('Choose a card to play from hand',
+    return described('Elige una carta de tu mano para jugar',
       mapOn(world, 'hand', function (c, i) {
         return {
-          description: 'Play ' + c.name,
+          description: 'Juegas ' + c.name,
           gameTreePromise: S.delay(function () {
             var wn = S.clone(world);
             S.discardX(wn, i);
@@ -325,19 +325,19 @@ var shephy = {};
 
   var cardHandlerTable = {};  //{{{2
 
-  cardHandlerTable['All-purpose Sheep'] = function (world, state) {  //{{{2
+  cardHandlerTable['Duplicar'] = function (world, state) {  //{{{2
     if (world.hand.length == 0) {
       return automated([{
-        description: 'No card in hand - nothing happened',
+        description: 'No tienes cartas en tu mano. No tiene efecto.',
         gameTreePromise: S.delay(function () {
           return S.makeGameTree(world);
         })
       }]);
     } else {
-      return described('Choose a card to copy in hand',
+      return described('Elige la carta de tu mano cuya acción quieres duplicar.',
         mapOn(world, 'hand', function (c, i) {
           return {
-            description: 'Copy ' + c.name,
+            description: 'Duplicas ' + c.name,
             gameTreePromise: S.delay(function () {
               return S.makeGameTree(world, {step: c.name});
             })
@@ -347,13 +347,13 @@ var shephy = {};
     }
   };
 
-  cardHandlerTable['Be Fruitful'] = function (world, state) {  //{{{2
+  cardHandlerTable['Fructificar'] = function (world, state) {  //{{{2
     if (state.rank === undefined) {
       if (world.field.length < 7) {
-        return described('Choose a card to copy in the field',
+        return described('Elige una carta del pasto que quieras copiar',
           mapOn(world, 'field', function (c) {
             return {
-              description: 'Copy ' + c.rank + ' Sheep card',
+              description: 'Copias la carta de oveja ' + c.rank,
               gameTreePromise: S.delay(function () {
                 return S.makeGameTree(world, {step: state.step, rank: c.rank});
               })
@@ -362,7 +362,7 @@ var shephy = {};
         );
       } else {
         return automated([{
-          description: 'Nothing happened',
+          description: 'Nada ocurre',
           gameTreePromise: S.delay(function () {
             return S.makeGameTree(world);
           })
@@ -370,7 +370,7 @@ var shephy = {};
       }
     } else {
       return automated([{
-        description: 'Gain a ' + state.rank + ' Sheep card',
+        description: 'Gana una carta de oveja ' + state.rank,
         gameTreePromise: S.delay(function () {
           var wn = S.clone(world);
           S.gainX(wn, state.rank);
@@ -380,19 +380,19 @@ var shephy = {};
     }
   };
 
-  cardHandlerTable['Crowding'] = function (world, state) {  //{{{2
+  cardHandlerTable['Apiñar'] = function (world, state) {  //{{{2
     if (world.field.length <= 2) {
       return automated([{
-        description: 'Too few sheep - nothing happened',
+        description: 'Pocas ovejas, no ocurre nada.',
         gameTreePromise: S.delay(function () {
           return S.makeGameTree(world);
         })
       }]);
     } else {
-      return described('Choose a card to release in the field',
+      return described('Elige una carta del pasto para descartar.',
         mapOn(world, 'field', function (c, i) {
           return {
-            description: 'Release ' + c.rank + ' Sheep card',
+            description: 'Descartas la carta de oveja ' + c.rank,
             gameTreePromise: S.delay(function () {
               var wn = S.clone(world);
               S.releaseX(wn, i);
@@ -405,12 +405,12 @@ var shephy = {};
     }
   };
 
-  cardHandlerTable['Dominion'] = function (world, state) {  //{{{2
+  cardHandlerTable['Dominio'] = function (world, state) {  //{{{2
     var chosenIndice = state.chosenIndice || [];
     var moves =
       mapOn(world, 'field', function (c, i) {
         return {
-          description: 'Choose ' + c.rank + ' Sheep card',
+          description: 'Elige una carta de oveja ' + c.rank,
           gameTreePromise: S.delay(function () {
             return S.makeGameTree(world, {
               step: state.step,
@@ -422,7 +422,7 @@ var shephy = {};
       .filter(function (m) {return chosenIndice.indexOf(m.cardIndex) == -1;});
     if (chosenIndice.length != 0) {
       moves.push({
-        description: 'Combine chosen Sheep cards',
+        description: 'Combina las cartas elegidas',
         gameTreePromise: S.delay(function () {
           var wn = S.clone(world);
           for (var i = chosenIndice.length - 1; 0 <= i; i--)
@@ -436,20 +436,20 @@ var shephy = {};
     }
 
     if (chosenIndice.length == 0)
-      moves.description = 'Choose a card in the field to combine';
+      moves.description = 'Elige una carta en el pasto para combinar';
     else if (chosenIndice.length != world.field.length)
-      moves.description = 'Choose a card in the field to combine, or';
+      moves.description = 'Elige una carta en el pasto para combinar, o';
     else
       moves.automated = true;
 
     return moves;
   };
 
-  cardHandlerTable['Falling Rock'] = function (world, state) {  //{{{2
-    return described('Choose a card to release in the field',
+  cardHandlerTable['Desprender'] = function (world, state) {  //{{{2
+    return described('Elige una carta en el pasto para descartar',
       mapOn(world, 'field', function (c, i) {
         return {
-          description: 'Release ' + c.rank + ' Sheep card',
+          description: 'Descartas la carta de oveja ' + c.rank,
           gameTreePromise: S.delay(function () {
             var wn = S.clone(world);
             S.releaseX(wn, i);
@@ -460,12 +460,12 @@ var shephy = {};
     );
   };
 
-  cardHandlerTable['Fill the Earth'] = function (world, state) {  //{{{2
+  cardHandlerTable['Repoblar'] = function (world, state) {  //{{{2
     var moves = [];
     if (world.field.length < 7) {
-      moves.description = 'Gain a 1 Sheep card, or';
+      moves.description = 'Gana una carta de oveja 1, o';
       moves.push({
-        description: 'Gain a 1 Sheep card',
+        description: 'Gana una carta de oveja 1',
         cardRegion: 'sheepStock1',
         cardIndex: world.sheepStock[1].length - 1,
         gameTreePromise: S.delay(function () {
@@ -475,11 +475,11 @@ var shephy = {};
         })
       });
     } else {
-      moves.description = 'No space in the field';
+      moves.description = 'No hay espacio en el pasto (máximo 7 cartas)';
       moves.automated = true;
     }
     moves.push({
-      description: 'Cancel',
+      description: 'Cancelar',
       gameTreePromise: S.delay(function () {
         return S.makeGameTree(world);
       })
@@ -487,13 +487,13 @@ var shephy = {};
     return moves;
   };
 
-  cardHandlerTable['Flourish'] = function (world, state) {  //{{{2
+  cardHandlerTable['Florecer'] = function (world, state) {  //{{{2
     if (state.rank === undefined) {
       if (world.field.length < 7) {
-        return described('Choose a card in the field',
+        return described('Elige una carta en el pasto',
           mapOn(world, 'field', function (c) {
             return {
-              description: 'Choose ' + c.rank + ' Sheep card',
+              description: 'Elige una carta de oveja ' + c.rank,
               gameTreePromise: S.delay(function () {
                 return S.makeGameTree(world, {step: state.step, rank: c.rank});
               })
@@ -502,7 +502,7 @@ var shephy = {};
         );
       } else {
         return automated([{
-          description: 'Nothing happened',
+          description: 'Nada ocurre',
           gameTreePromise: S.delay(function () {
             return S.makeGameTree(world);
           })
@@ -512,7 +512,7 @@ var shephy = {};
       var lowerRank = S.dropRank(state.rank);
       if (lowerRank === undefined) {
         return automated([{
-          description: 'Gain nothing',
+          description: 'No ganas nada',
           gameTreePromise: S.delay(function () {
             return S.makeGameTree(world);
           })
@@ -522,8 +522,8 @@ var shephy = {};
         return automated([{
           description:
             n == 1
-            ? 'Gain a ' + lowerRank + ' Sheep card'
-            : 'Gain ' + n + ' cards of ' + lowerRank + ' Sheep',
+            ? 'Ganas una carta de oveja ' + lowerRank
+            : 'Ganas ' + n + ' cartas de oveja ' + lowerRank,
           gameTreePromise: S.delay(function () {
             var wn = S.clone(world);
             for (var i = 1; i <= n; i++)
@@ -535,7 +535,7 @@ var shephy = {};
     }
   };
 
-  cardHandlerTable['Golden Hooves'] = function (world, state) {  //{{{2
+  cardHandlerTable['Pezuñas'] = function (world, state) {  //{{{2
     var highestRank = max(world.field.map(function (c) {return c.rank;}));
     var chosenIndice = state.chosenIndice || [];
     var moves = [];
@@ -543,7 +543,7 @@ var shephy = {};
     world.field.forEach(function (c, i) {
       if (c.rank < highestRank && chosenIndice.indexOf(i) == -1) {
         moves.push({
-          description: 'Choose ' + c.rank + ' Sheep card',
+          description: 'Elige una carta de oveja ' + c.rank,
           cardRegion: 'field',
           cardIndex: i,
           gameTreePromise: S.delay(function () {
@@ -556,13 +556,13 @@ var shephy = {};
       }
     });
     if (moves.length != 0)
-      moves.description = 'Choose a card in the field, or'
+      moves.description = 'Elige una carta en el pasto, o'
 
     moves.push({
       description:
         chosenIndice.length == 0
-        ? 'Cancel'
-        : 'Raise ranks of chosen Sheep cards',
+        ? 'Cancelar'
+        : 'Incrementas el rango de las cartas de oveja seleccionadas',
       gameTreePromise: S.delay(function () {
         var wn = S.clone(world);
         for (var i = chosenIndice.length - 1; 0 <= i; i--) {
@@ -579,19 +579,19 @@ var shephy = {};
     return moves;
   };
 
-  cardHandlerTable['Inspiration'] = function (world, state) {  //{{{2
+  cardHandlerTable['Inspiración'] = function (world, state) {  //{{{2
     if (world.deck.length == 0) {
       return automated([{
-        description: 'No card in deck - nothing happened',
+        description: 'No hay cartas en el mazo, nada ocurre',
         gameTreePromise: S.delay(function () {
           return S.makeGameTree(world);
         })
       }]);
     } else if (state.searched === undefined) {
-      return described('Choose a card in the deck',
+      return described('Elige una carta del mazo',
         mapOn(world, 'deck', function (c, i) {
           return {
-            description: 'Put ' + c.name + ' into your hand',
+            description: 'Pones la carta ' + c.name + ' en tu mano',
             gameTreePromise: S.delay(function () {
               var wn = S.clone(world);
               wn.hand.push(wn.deck.splice(i, 1)[0]);
@@ -602,7 +602,7 @@ var shephy = {};
       );
     } else {
       return automated([{
-        description: 'Shuffle the deck',
+        description: 'Barajas el mazo',
         gameTreePromise: S.delay(function () {
           var wn = S.clone(world);
           shuffle(wn.deck);
@@ -612,15 +612,15 @@ var shephy = {};
     }
   };
 
-  cardHandlerTable['Lightning'] = function (world, state) {  //{{{2
+  cardHandlerTable['Relámpago'] = function (world, state) {  //{{{2
     var highestRank = max(world.field.map(function (c) {return c.rank;}));
-    return described('Choose a card to release in the field',
+    return described('Elige una carta del pasto para descartar',
       world.field
       .map(function (c, i) {return [c, i];})
       .filter(function (x) {return x[0].rank == highestRank;})
       .map(function (x) {
         return {
-          description: 'Release ' + x[0].rank + ' Sheep card',
+          description: 'Descartas la carta de oveja ' + x[0].rank,
           cardRegion: 'field',
           cardIndex: x[1],
           gameTreePromise: S.delay(function () {
@@ -633,12 +633,12 @@ var shephy = {};
     );
   };
 
-  cardHandlerTable['Meteor'] = function (world, state) {  //{{{2
+  cardHandlerTable['Meteorito'] = function (world, state) {  //{{{2
     var n = Math.min(state.rest || 3, world.field.length);
-    return described('Choose a card to release in the field',
+    return described('Elige una carta del pasto para descartar',
       mapOn(world, 'field', function (c, i) {
         return {
-          description: 'Release ' + c.rank + ' Sheep card',
+          description: 'Descartas la carta de oveja ' + c.rank,
           gameTreePromise: S.delay(function () {
             var wn = S.clone(world);
             if (state.rest === undefined)
@@ -652,10 +652,10 @@ var shephy = {};
     );
   };
 
-  cardHandlerTable['Multiply'] = function (world, state) {  //{{{2
+  cardHandlerTable['Multiplicar'] = function (world, state) {  //{{{2
     if (world.field.length < 7 && 0 < world.sheepStock[3].length) {
       return automated([{
-        description: 'Gain a 3 Sheep card',
+        description: 'Ganas una carta de oveja 3',
         gameTreePromise: S.delay(function () {
           var wn = S.clone(world);
           S.gainX(wn, 3);
@@ -664,7 +664,7 @@ var shephy = {};
       }]);
     } else {
       return automated([{
-        description: 'Nothing happened',
+        description: 'Nada ocurre',
         gameTreePromise: S.delay(function () {
           return S.makeGameTree(world);
         })
@@ -672,12 +672,12 @@ var shephy = {};
     }
   };
 
-  cardHandlerTable['Plague'] = function (world, state) {  //{{{2
-    return described('Choose a card to release in the field',
+  cardHandlerTable['Plaga'] = function (world, state) {  //{{{2
+    return described('Elige una carta de oveja del pasto para descartar',
       mapOn(world, 'field', function (c) {
         var r = c.rank;
         return {
-          description: 'Release all ' + r + ' Sheep cards',
+          description: 'Descartas todas las cartas de oveja de rango ' + r,
           gameTreePromise: S.delay(function () {
             var wn = S.clone(world);
             for (var i = wn.field.length - 1; 0 <= i; i--) {
@@ -704,19 +704,19 @@ var shephy = {};
     return us;
   }
 
-  cardHandlerTable['Planning Sheep'] = function (world, state) {  //{{{2
+  cardHandlerTable['Planificar'] = function (world, state) {  //{{{2
     if (world.hand.length == 0) {
       return automated([{
-        description: 'No card to exile - nothing happened',
+        description: 'No hay cartas para eliminar, nada ocurre',
         gameTreePromise: S.delay(function () {
           return S.makeGameTree(world);
         })
       }]);
     } else {
-      return described('Choose a card to exile in hand',
+      return described('Elige una carta de tu mano para eliminar',
         mapOn(world, 'hand', function (c, i) {
           return {
-            description: 'Exile ' + c.name,
+            description: 'Eliminas la carta' + c.name,
             gameTreePromise: S.delay(function () {
               var wn = S.clone(world);
               S.exileX(wn, wn.hand, i);
@@ -728,19 +728,19 @@ var shephy = {};
     }
   };
 
-  cardHandlerTable['Sheep Dog'] = function (world, state) {  //{{{2
+  cardHandlerTable['Ovejero'] = function (world, state) {  //{{{2
     if (world.hand.length == 0) {
       return automated([{
-        description: 'No card to discard - nothing happened',
+        description: 'No hay cartas para descartar, nada ocurre',
         gameTreePromise: S.delay(function () {
           return S.makeGameTree(world);
         })
       }]);
     } else {
-      return described('Choose a card to discard in hand',
+      return described('Elige una carta en tu mano para descartar',
         mapOn(world, 'hand', function (c, i) {
           return {
-            description: 'Discard ' + c.name,
+            description: 'Descartas' + c.name,
             gameTreePromise: S.delay(function () {
               var wn = S.clone(world);
               S.discardX(wn, i);
@@ -752,9 +752,9 @@ var shephy = {};
     }
   };
 
-  cardHandlerTable['Shephion'] = function (world, state) {  //{{{2
+  cardHandlerTable['Fiebre'] = function (world, state) {  //{{{2
     return automated([{
-      description: 'Release all Sheep cards',
+      description: 'Descartas todas las cartas de oveja',
       gameTreePromise: S.delay(function () {
         var wn = S.clone(world);
         while (1 <= wn.field.length)
@@ -764,10 +764,10 @@ var shephy = {};
     }]);
   };
 
-  cardHandlerTable['Slump'] = function (world, state) {  //{{{2
+  cardHandlerTable['Declive'] = function (world, state) {  //{{{2
     if (world.field.length == 1) {
       return automated([{
-        description: 'No sheep to release - nothing happened',
+        description: 'No hay ovejas para descartar, no ocurre nada',
         gameTreePromise: S.delay(function () {
           return S.makeGameTree(world);
         })
@@ -775,10 +775,10 @@ var shephy = {};
     } else {
       var n = state.initialCount || world.field.length;
       var countToKeep = Math.ceil(n / 2);
-      return described('Choose a card to release in the field',
+      return described('Elige una carta en el pasto para descartar',
         mapOn(world, 'field', function (c, i) {
           return {
-            description: 'Release ' + c.rank + ' Sheep card',
+            description: 'Descartas la carta de oveja ' + c.rank,
             gameTreePromise: S.delay(function () {
               var wn = S.clone(world);
               S.releaseX(wn, i);
@@ -793,12 +793,12 @@ var shephy = {};
     }
   };
 
-  cardHandlerTable['Storm'] = function (world, state) {  //{{{2
+  cardHandlerTable['Tormenta'] = function (world, state) {  //{{{2
     var n = Math.min(state.rest || 2, world.field.length);
-    return described('Choose a card to release in the field',
+    return described('Elige una carta en el pasto para descartar',
       mapOn(world, 'field', function (c, i) {
         return {
-          description: 'Release ' + c.rank + ' Sheep card',
+          description: 'Descartas la carta de oveja ' + c.rank,
           gameTreePromise: S.delay(function () {
             var wn = S.clone(world);
             S.releaseX(wn, i);
@@ -810,17 +810,17 @@ var shephy = {};
     );
   };
 
-  cardHandlerTable['Wolves'] = function (world, state) {  //{{{2
+  cardHandlerTable['Lobos'] = function (world, state) {  //{{{2
     var highestRank = max(world.field.map(function (c) {return c.rank;}));
     if (highestRank == 1)
-      return cardHandlerTable['Lightning'](world, state);
-    return described('Choose a card to reduce its rank in the field',
+      return cardHandlerTable['Relámpago'](world, state);
+    return described('Elige una carta en el pasto para decrementar su rango',
       world.field
       .map(function (c, i) {return [c, i];})
       .filter(function (x) {return x[0].rank == highestRank;})
       .map(function (x) {
         return {
-          description: 'Reduce the rank of ' + x[0].rank + ' Sheep card',
+          description: 'Decrementas el rango de la carta de oveja ' + x[0].rank,
           cardRegion: 'field',
           cardIndex: x[1],
           gameTreePromise: S.delay(function () {
@@ -864,29 +864,29 @@ var shephy = {};
   }
 
   var ruleTextFromCardNameTable = {
-    'All-purpose Sheep': 'Choose a card in your hand.\nPlay this card in place of the card you chose.',
-    'Be Fruitful': 'Duplicate one of your Sheep cards.',
-    'Crowding': 'Release all but two Sheep cards.',
-    'Dominion': 'Choose any number of Sheep cards in the Field.\nAdd their values and then replace them with\none Sheep card of equal of lesser value.',
-    'Falling Rock': 'Relase one Sheep card.',
-    'Fill the Earth': 'Place as many 1 Sheep cards as you like in the Field.',
-    'Flourish': 'Choose one of your Sheep cards\nand receive three Sheep cards of one rank lower.',
-    'Golden Hooves': 'Raise the rank of as many Sheep cards as you like,\nexcept for your highest-ranking Sheep card.',
-    'Inspiration': 'Look through the deck\nand add one card of your choice to your hand,\nand then re-shuffle the deck.',
-    'Lightning': 'Release your highest-ranking Sheep card.',
-    'Meteor': 'Release three Sheep cards,\nand then remove this card from the game.',
-    'Multiply': 'Place one 3 Sheep card in the Field.',
-    'Plague': 'Release all Sheep cards of one rank.',
-    'Planning Sheep': 'Remove one card in your hand from the game.',
-    'Sheep Dog': 'Discard one card from your hand.',
-    'Shephion': 'Release seven Sheep cards.',
-    'Slump': 'Relase half of your Sheep cards (Round down.)',
-    'Storm': 'Release two Sheep cards.',
-    'Wolves': 'Reduce the rank of your highest-ranking sheep card by one.\nIf your highest ranaking Sheep card is 1, release it.'
+    'Duplicar': 'Elige una de las cartas de tu mano. Juega esta carta para duplicar el efecto de la elegida',
+    'Fructificar': 'Duplica una de tus cartas de oveja',
+    'Apiñar': 'Descarta todas tus cartas de oveja excepto dos',
+    'Dominio': 'Selecciona cualquier número de cartas de oveja en el pasto.\nSuma sus valores y reemplázalas por una carta de oveja de igual o menos valor',
+    'Desprender': 'Descarta una carta de oveja',
+    'Repoblar': 'Coloca tantas cartas de oveja de valor 1 como quieras en el pasto',
+    'Florecer': 'Elige una de tus cartas de oveja y recibe tres cartas de oveja de un rango inferior',
+    'Pezuñas': 'Incrementa de rango todas las cartas de Oveja del pasto excepto la(s) de mayor rango',
+    'Inspiración': 'Mira en el mazo, elige una carta de acción y baraja de nuevo el mazo',
+    'Relámpago': 'Descarta tu carta de oveja de mayor rango',
+    'Meteorito': 'Descarta tres cartas de oveja, y elmina esta carta del juego',
+    'Multiplicar': 'Coloca una carta de oveja 3 en el pasto',
+    'Plaga': 'Descarta todas las cartas de oveja de un rango',
+    'Planificar': 'Elimina una carta de acción de tu mano del juego',
+    'Ovejero': 'Descarta una carta de acción de tu mano',
+    'Fiebre': 'Descarta siete cartas de oveja',
+    'Declive': 'Descarta la mitad de tus cartas de oveja (redondeo hacia abajo)',
+    'Tormenta': 'Descarta dos cartas de oveja',
+    'Lobos': 'Decrementa el rango de la carta de oveja de mayor rango en uno.\nSi es de rango 1 descártala'
   };
 
   function helpTextFromCard(card) {
-    return card.name + '\n\n' + ruleTextFromCardNameTable[card.name];
+    return card.name + '\n' + ruleTextFromCardNameTable[card.name];
   }
 
   function makeFaceDownCards(n) {
