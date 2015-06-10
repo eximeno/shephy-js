@@ -4,47 +4,54 @@ body{ text-align: center; }
 #mensajes{ height: 32px; margin-bottom: 40px; width: 900px; text-transform: uppercase; text-align: center}
 #mesa{ width: 500px; float: left; margin-bottom: 70px;}
 #sheepStock{width: 100px; float: left; margin-bottom: 70px;}
+#sheepStock1{margin-bottom: 5px;}
+#sheepStock3{margin-bottom: 5px;}
+#sheepStock10{margin-bottom: 5px;}
+#sheepStock30{margin-bottom: 5px;}
+#sheepStock100{margin-bottom: 5px;}
+#sheepStock300{margin-bottom: 5px;}
+#sheepStock1000{margin-bottom: 5px;}
 #field{margin-bottom: 20px}
 #hand{margin-bottom: 20px}
 #deck{margin-bottom: 20px}
 #discardPile{width: 350px; float: left; margin-bottom: 20px}
 #exile{width: 150px; float: right; margin-bottom: 20px}
-      
-#mensajes {font-size: 18px; color: #0000FF; font-weight: bold }
+
+#mensajes {font-size: 18px; color: #060; font-weight: bold }
 
 .card {
-  display: inline-block;
-  margin: 0.5ex;
+    display: inline-block;
+    margin: 0.5ex;
 }
 
 .clickable.card > .border {
-  box-shadow: 0 0 0.5ex 0 #000;
-  cursor: pointer;
+    box-shadow: 0 0 0.5ex 0 #000;
+    cursor: pointer;
 }
 
 .clickable.card:hover > .border {
-  box-shadow: 0 0 1.0ex 0 #cc0;
+    box-shadow: 0 0 2.0ex 0 #cc0;
 }
 
 .card > .border {
-  display: inline-block;
-  border: thin solid #000;
+    display: inline-block;
+    border: thin solid #000;
 }
 
 .card > .border > .body {
-  overflow: hidden;
-  white-space: nowrap;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .card.sheep > .border > .body {
-  display: inline-block;
-  width: 6.6ex;
-  height: 4.8ex;
-  padding: 0.5ex;
-  border-top: 2ex solid #cff;
-  border-bottom: 2ex solid #3c3;
-  background: #fff;
-  text-align: center;
+    display: inline-block;
+    width: 6.6ex;
+    height: 4.8ex;
+    padding: 0.5ex;
+    border-top: 2ex solid #cff;
+    border-bottom: 2ex solid #3c3;
+    background: #fff;
+    text-align: center;
 }
 
 .card.sheep.rank1    > .border > .body {border-bottom-color: #ce0;}
@@ -56,37 +63,37 @@ body{ text-align: center; }
 .card.sheep.rank1000 > .border > .body {border-bottom-color: #060;}
 
 .card.event > .border > .body {
-  display: inline-block;
-  width: 10.6ex;
-  height: 13.8ex;  
-  padding: 0.5ex 0.5ex 0.5ex 0;
-  background: #B2FF66;
-  text-align: center;
-  line-height: 13.8ex;
-  border-left: 0.5ex solid #db7;
+    display: inline-block;
+    width: 10.6ex;
+    height: 13.8ex;
+    padding: 0.5ex 0.5ex 0.5ex 0;
+    background:  #ce0;
+    text-align: center;
+    line-height: 13.8ex;
+    <!--border-left: 0.5ex solid #db7;-->
 }
 
 .card.face-down {
-  line-height: 0;
+    line-height: 0;
 }
 .card.face-down > .border {
-  background: #393;
+    background: #393;
 }
 .card.face-down > .border > .body {
-  display: inline-block;
-  width: 4.6ex;
-  height: 6.8ex;
-  margin: 0.5ex;
-  padding: 0.5ex;
-  border-radius: 1ex;
-  background: #66CC00;
+    display: inline-block;
+    width: 4.6ex;
+    height: 6.8ex;
+    margin: 0.5ex;
+    padding: 0.5ex;
+    border-radius: 0ex;
+    background: #060;
 }
 
 .stacked.cards > .card,
 .lined.cards > .card {
-  margin: 0;
-  width: 0;
-  overflow: visible;
+    margin: 0;
+    width: 0;
+    overflow: visible;
 }
 
 .tightly.lined.cards > .card {margin-left: 0.25em;}
@@ -118,33 +125,33 @@ body{ text-align: center; }
 
 .stacked.cards > .card {position: relative;}
 .stacked.cards > .card:nth-child( 1) {top: 0.00ex; left: 0.00ex;}
-.stacked.cards > .card:nth-child( 2) {top: 0.30ex; left: 0.30ex;}
-.stacked.cards > .card:nth-child( 3) {top: 0.60ex; left: 0.60ex;}
-.stacked.cards > .card:nth-child( 4) {top: 0.90ex; left: 0.90ex;}
-.stacked.cards > .card:nth-child( 5) {top: 1.20ex; left: 1.20ex;}
-.stacked.cards > .card:nth-child( 6) {top: 1.50ex; left: 1.50ex;}
-.stacked.cards > .card:nth-child( 7) {top: 1.80ex; left: 1.80ex;}
-.stacked.cards > .card:nth-child( 8) {top: 2.10ex; left: 2.10ex;}
-.stacked.cards > .card:nth-child( 9) {top: 2.40ex; left: 2.40ex;}
-.stacked.cards > .card:nth-child(10) {top: 2.70ex; left: 2.70ex;}
-.stacked.cards > .card:nth-child(11) {top: 3.00ex; left: 3.00ex;}
-.stacked.cards > .card:nth-child(12) {top: 3.30ex; left: 3.30ex;}
-.stacked.cards > .card:nth-child(13) {top: 3.60ex; left: 3.60ex;}
-.stacked.cards > .card:nth-child(14) {top: 3.90ex; left: 3.90ex;}
-.stacked.cards > .card:nth-child(15) {top: 4.20ex; left: 4.20ex;}
-.stacked.cards > .card:nth-child(16) {top: 4.50ex; left: 4.50ex;}
-.stacked.cards > .card:nth-child(17) {top: 4.80ex; left: 4.80ex;}
-.stacked.cards > .card:nth-child(18) {top: 5.10ex; left: 5.10ex;}
-.stacked.cards > .card:nth-child(19) {top: 5.40ex; left: 5.40ex;}
-.stacked.cards > .card:nth-child(20) {top: 5.70ex; left: 5.70ex;}
-.stacked.cards > .card:nth-child(21) {top: 6.00ex; left: 6.00ex;}
-.stacked.cards > .card:nth-child(22) {top: 6.30ex; left: 6.30ex;}
+.stacked.cards > .card:nth-child( 2) {top: 0.00ex; left: 0.30ex;}
+.stacked.cards > .card:nth-child( 3) {top: 0.00ex; left: 0.60ex;}
+.stacked.cards > .card:nth-child( 4) {top: 0.00ex; left: 0.90ex;}
+.stacked.cards > .card:nth-child( 5) {top: 0.00ex; left: 1.20ex;}
+.stacked.cards > .card:nth-child( 6) {top: 0.00ex; left: 1.50ex;}
+.stacked.cards > .card:nth-child( 7) {top: 0.00ex; left: 1.80ex;}
+.stacked.cards > .card:nth-child( 8) {top: 0.00ex; left: 2.10ex;}
+.stacked.cards > .card:nth-child( 9) {top: 0.00ex; left: 2.40ex;}
+.stacked.cards > .card:nth-child(10) {top: 0.00ex; left: 2.70ex;}
+.stacked.cards > .card:nth-child(11) {top: 0.00ex; left: 3.00ex;}
+.stacked.cards > .card:nth-child(12) {top: 0.00ex; left: 3.30ex;}
+.stacked.cards > .card:nth-child(13) {top: 0.00ex; left: 3.60ex;}
+.stacked.cards > .card:nth-child(14) {top: 0.00ex; left: 3.90ex;}
+.stacked.cards > .card:nth-child(15) {top: 0.00ex; left: 4.20ex;}
+.stacked.cards > .card:nth-child(16) {top: 0.00ex; left: 4.50ex;}
+.stacked.cards > .card:nth-child(17) {top: 0.00ex; left: 4.80ex;}
+.stacked.cards > .card:nth-child(18) {top: 0.00ex; left: 5.10ex;}
+.stacked.cards > .card:nth-child(19) {top: 0.00ex; left: 5.40ex;}
+.stacked.cards > .card:nth-child(20) {top: 0.00ex; left: 5.70ex;}
+.stacked.cards > .card:nth-child(21) {top: 0.00ex; left: 6.00ex;}
+.stacked.cards > .card:nth-child(22) {top: 0.00ex; left: 6.30ex;}
 
 #sheepStock > .stacked.cards {
-  display: inline-block;
-  width: 10ex;
+    display: inline-block;
+    width: 10ex;
 }
 
 #world > div {
-  margin-bottom: 1ex;
+    margin-bottom: 1ex;
 }

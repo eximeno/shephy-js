@@ -401,7 +401,7 @@ var shephy = {};
             })
           };
         })
-      );;
+      );
     }
   };
 
@@ -842,7 +842,7 @@ var shephy = {};
         return S.makeGameTree(world);
       })
     }];
-  };
+  }
 
   // UI  {{{1
   // TODO: Add UI to start a new game after finishing a game.

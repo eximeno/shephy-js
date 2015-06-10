@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="es">
+<head>
     <meta charset="utf-8">
     <title>Shephy JS (en castellano)</title>
     <link href="app.css" rel="stylesheet">
-  </head>
-  <body>
-    <div id="world">
+</head>
+<body>
+<div id="world">
     <div id="mensajes">
-      <div id="message"></div>
-      <div id="moves"></div>
-    </div> 
-      <div id="sheepStock">
+        <div id="message"></div>
+        <div id="moves"></div>
+    </div>
+    <div id="sheepStock">
         <div id="sheepStock1" class="stacked cards"></div>
         <div id="sheepStock3" class="stacked cards"></div>
         <div id="sheepStock10" class="stacked cards"></div>
@@ -19,28 +19,28 @@
         <div id="sheepStock100" class="stacked cards"></div>
         <div id="sheepStock300" class="stacked cards"></div>
         <div id="sheepStock1000" class="stacked cards"></div>
-      </div>    
-    <div id="mesa">      
-      
-      <div id="field"><strong>PASTO</strong><br><span class="cards"></span></div>
-      <div id="hand"><strong>MANO DE CARTAS</strong><br><span class="cards"></span></div>
+    </div>
+    <div id="mesa">
 
-      <div id="deck"><strong>MAZO</strong><br><span class="lined cards"></span></div>
-      <div id="discardPile"><strong>DESCARTES</strong><br><span class="lined cards"></span></div>
-      <div id="exile"><strong>ELIMINADAS</strong><br><span class="stacked cards"></span></div>
+        <div id="field"><strong>PASTO</strong><br><span class="cards"></span></div>
+        <div id="hand"><strong>MANO DE CARTAS</strong><br><span class="cards"></span></div>
+
+        <div id="deck"><strong>MAZO</strong><br><span class="lined cards"></span></div>
+        <div id="discardPile"><strong>DESCARTES</strong><br><span class="lined cards"></span></div>
+        <div id="exile"><strong>ELIMINADAS</strong><br><span class="stacked cards"></span></div>
 
     </div>
     <div id="reglas">
-      <input type="button" value="Nueva partida" onClick="location.reload();" style="width: 120px; height: 30px; background: #6699FF; color: #ffffff; cursor: pointer; border: 0px;"/>
-            <div id="enemySheepCount"><strong>CONTADOR DE OVEJAS DEL RIVAL</strong>: <span class="count"></span></div>     
-    <h1>SHEPHY</h1>
-    <p><strong>Preparación</strong>: Tenemos cartas de ovejas con valor 1, 3, 10, 30, 100, 300 y 1000. Al empezar se coloca una carta de 1 oveja en el pasto y se cogen 5 cartas de acción en la mano. </p>
-<p><strong>Desarrollo</strong>: Cada turno juegas una carta de acción de tu mano. Después repones la mano hasta 5 cartas. Juegas hasta que se agota el mazo y tus cartas en la mano. Entonces barajas de nuevo el mazo de cartas de acción.</p>
-<p><strong>Fin de partida</strong>: Si agotas el mazo tres veces sin tener al menos una carta de 1.000 ovejas en el pasto o si en cualquier momento del juego no tienes ovejas en el pasto, pierdes.</p>
-<p><strong>Créditos</strong><br>Juego de cartas creado por <a href="http://www.bouken.jp/pd/sp/" target=_blank>Pawn</a><br>Implementación js original: <a href="https://github.com/kana" target="_blank">Kana Natsuno</a><br>Traducción: <a href="http://www.labsk.net/wkr" target=_blank>Wkr</a>/<a href="http://www.labsk.net" target=_blank>BSK</a>/<a href="http://www.eximeno.com" target=_blank>Santiago Eximeno</a><br>Desarrollo adicional: <a href="https://github.com/eximeno/shephy-js" target=_blank>Santiago Eximeno</a></p>
+        <input type="button" value="Nueva partida" onClick="location.reload();" style="width: 120px; height: 30px; background: #ce0; color: #ffffff; cursor: pointer; border: 1px;"/>
+        <div id="enemySheepCount"><strong>CONTADOR DE OVEJAS DEL RIVAL</strong>: <span class="count"></span></div>
+        <h1>SHEPHY</h1>
+        <p><strong>Preparación</strong>: Tenemos cartas de ovejas con valor 1, 3, 10, 30, 100, 300 y 1000. Al empezar se coloca una carta de 1 oveja en el pasto y se cogen 5 cartas de acción en la mano. </p>
+        <p><strong>Desarrollo</strong>: Cada turno juegas una carta de acción de tu mano. Después repones la mano hasta 5 cartas. Juegas hasta que se agota el mazo y tus cartas en la mano. Entonces barajas de nuevo el mazo de cartas de acción.</p>
+        <p><strong>Fin de partida</strong>: Si agotas el mazo tres veces sin tener al menos una carta de 1.000 ovejas en el pasto o si en cualquier momento del juego no tienes ovejas en el pasto, pierdes.</p>
+        <p><strong>Créditos</strong><br>Juego de cartas creado por <a href="http://www.bouken.jp/pd/sp/" target=_blank>Pawn</a><br>Implementación js original: <a href="https://github.com/kana" target="_blank">Kana Natsuno</a><br>Traducción: <a href="http://www.labsk.net/wkr" target=_blank>Wkr</a>/<a href="http://www.labsk.net" target=_blank>BSK</a>/<a href="http://www.eximeno.com" target=_blank>Santiago Eximeno</a><br>Desarrollo adicional: <a href="https://github.com/eximeno/shephy-js" target=_blank>Santiago Eximeno</a></p>
     </div>
-     </div>    
-    <script src="vendor/jquery/jquery-2.0.3.min.js"></script>
-    <script src="app.js"></script>
-  </body>
+</div>
+<script src="vendor/jquery/jquery-2.0.3.min.js"></script>
+<script src="app.js"></script>
+</body>
 </html>
